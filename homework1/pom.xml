@@ -69,7 +69,7 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
                             <mainClass>
-                                ru.otus.homework.Main
+                                homework.ru.otus.homework.Main
                             </mainClass>
                         </manifest>
                     </archive>

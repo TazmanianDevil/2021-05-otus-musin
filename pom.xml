@@ -21,6 +21,7 @@
         <dep.lombok.version>1.18.20</dep.lombok.version>
         <dep.commons-lang.version>3.12.0</dep.commons-lang.version>
         <dep.slf4j.version>1.7.30</dep.slf4j.version>
+        <dep.junit.version>5.7.2</dep.junit.version>
     </properties>
 
     <dependencyManagement>
@@ -54,7 +55,7 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>5.7.2</version>
+                <version>${dep.junit.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
