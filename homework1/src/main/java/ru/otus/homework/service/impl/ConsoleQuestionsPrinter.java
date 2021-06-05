@@ -1,6 +1,8 @@
 package ru.otus.homework.service.impl;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import ru.otus.homework.domain.Answer;
 import ru.otus.homework.domain.Question;
 import ru.otus.homework.service.QuestionsFileParser;
@@ -8,10 +10,12 @@ import ru.otus.homework.service.QuestionsPrinter;
 
 import java.util.Collection;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
+@Slf4j
+@Service
 public class ConsoleQuestionsPrinter implements QuestionsPrinter {
 
-    private QuestionsFileParser parser;
+    private final QuestionsFileParser parser;
 
     @Override
     public void printQuestion() {
