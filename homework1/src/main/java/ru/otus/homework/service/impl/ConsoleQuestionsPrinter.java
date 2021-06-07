@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.otus.homework.domain.Answer;
 import ru.otus.homework.domain.Question;
-import ru.otus.homework.service.QuestionsFileParser;
 import ru.otus.homework.service.QuestionsPrinter;
 
 import java.util.Collection;
@@ -15,15 +14,8 @@ import java.util.Collection;
 @Service
 public class ConsoleQuestionsPrinter implements QuestionsPrinter {
 
-    private final QuestionsFileParser parser;
-
     @Override
-    public void printQuestion() {
-        Collection<Question> questions = parser.parseQuestions();
-        questions.forEach(this::printQuestionWithAnswers);
-    }
-
-    private void printQuestionWithAnswers(Question question) {
+    public void printQuestion(Question question) {
         System.out.println(question.getQuestion());
         if (question.isFreeAnswer()) {
             System.out.println("Free answer:");

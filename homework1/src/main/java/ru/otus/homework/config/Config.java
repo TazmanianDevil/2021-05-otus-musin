@@ -10,11 +10,8 @@ import org.springframework.core.io.ClassPathResource;
 @PropertySource("classpath:application.properties")
 public class Config {
 
-    @Value("${filePath}")
-    private String filePath;
-
     @Bean
-    public ClassPathResource resourceFile() {
+    public ClassPathResource resourceFile(@Value("${filePath}") String filePath) {
         return new ClassPathResource(filePath);
     }
 }
