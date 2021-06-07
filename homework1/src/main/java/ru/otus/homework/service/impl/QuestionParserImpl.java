@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import ru.otus.homework.domain.Answer;
 import ru.otus.homework.domain.Question;
-import ru.otus.homework.domain.exception.FileParseException;
 import ru.otus.homework.domain.exception.QuestionParseException;
 import ru.otus.homework.service.QuestionParser;
 

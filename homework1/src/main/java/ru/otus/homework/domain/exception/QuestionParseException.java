@@ -1,6 +1,6 @@
 package ru.otus.homework.domain.exception;
 
-public class QuestionParseException extends RuntimeException{
+public class QuestionParseException extends RuntimeException {
     public QuestionParseException() {
         super("Can't parse question");
     }

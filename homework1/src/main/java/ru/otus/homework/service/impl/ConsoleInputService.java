@@ -33,7 +33,7 @@ public class ConsoleInputService implements UserInputService {
     private String getText(String fieldName) {
         String text = null;
         while (StringUtils.isEmpty(text)) {
-            System.out.print("Enter your " + fieldName +": ");
+            System.out.print("Enter your " + fieldName + ": ");
             text = scanner.nextLine();
         }
         return text;
