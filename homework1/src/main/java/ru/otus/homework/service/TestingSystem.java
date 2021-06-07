@@ -32,9 +32,9 @@ public class TestingSystem {
 
     private void showResults(final String fullName, int userCorrectAnswersCount) {
         if (correctAnswersCount <= userCorrectAnswersCount) {
-            System.out.println(fullName + ", Вы ответили правильно на " + userCorrectAnswersCount + " из " + totalAnswersCount + ". Поздравляем!");
+            System.out.println(fullName + ", You answered " + userCorrectAnswersCount + " of " + totalAnswersCount + ". Congratulations!");
         } else {
-            System.out.println(fullName + ", Вы ответили правильно всего на " + userCorrectAnswersCount + " из " + totalAnswersCount + ". Попробуйте еще раз!");
+            System.out.println(fullName + ", You answered just " + userCorrectAnswersCount + " of " + totalAnswersCount + ". Try again!");
         }
     }
 
