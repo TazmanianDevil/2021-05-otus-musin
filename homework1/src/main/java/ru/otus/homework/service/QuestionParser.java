@@ -4,5 +4,5 @@ import ru.otus.homework.domain.Question;
 
 public interface QuestionParser {
     
-    Question parseQuestion(String questionString);
+    Question parse(String questionString);
 }

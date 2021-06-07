@@ -32,7 +32,7 @@ public class CsvFileQuestionsParser implements QuestionsFileParser {
             return reader
                     .lines()
                     .filter(StringUtils::isNotEmpty)
-                    .map(questionParser::parseQuestion)
+                    .map(questionParser::parse)
                     .collect(Collectors.toList());
         } catch (IOException e) {
             throw new FileParseException();

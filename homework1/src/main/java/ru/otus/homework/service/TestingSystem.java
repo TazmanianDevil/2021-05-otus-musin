@@ -18,9 +18,9 @@ public class TestingSystem {
 
     private final QuestionsFileParser fileParser;
     private final UserInputService inputService;
-    @Value("${totalAnswersCount}")
+    @Value("${testing.answers.total.count}")
     private int totalAnswersCount;
-    @Value("${correctAnswersCount}")
+    @Value("${testing.answers.correct.count}")
     private int correctAnswersCount;
 
     public void test() {

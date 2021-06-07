@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.otus.homework.domain.Answer;
 import ru.otus.homework.domain.Question;
 import ru.otus.homework.domain.exception.FileParseException;
+import ru.otus.homework.domain.exception.QuestionParseException;
 import ru.otus.homework.service.QuestionParser;
 
 import java.util.ArrayList;
@@ -14,7 +15,10 @@ import java.util.Collections;
 @Service
 public class QuestionParserImpl implements QuestionParser {
     @Override
-    public Question parseQuestion(String questionString) {
+    public Question parse(String questionString) {
+        if (StringUtils.isEmpty(questionString)) {
+            throw new QuestionParseException();
+        }
         final String[] strings = questionString.split(";");
         final String question = strings[0];
         final boolean freeAnswer = strings.length == 1;
@@ -38,7 +42,7 @@ public class QuestionParserImpl implements QuestionParser {
             answers.add(new Answer(strings[i], isCorrectAnswer));
         }
         if (!booleanAnswer) {
-            throw new FileParseException("There is now correct answer");
+            throw new QuestionParseException("There is now correct answer");
         }
         return answers;
     }
