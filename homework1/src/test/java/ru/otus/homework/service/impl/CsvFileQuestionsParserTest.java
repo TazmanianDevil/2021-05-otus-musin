@@ -14,13 +14,13 @@ class CsvFileQuestionsParserTest {
 
     @Test
     public void whenParseNullableResourceExceptionIsThrown() {
-        assertThrows(FileParseException.class, () -> new CsvFileQuestionsParser(null).parseQuestions());
+        assertThrows(FileParseException.class, () -> new CsvFileQuestionsParser(null, new QuestionParserImpl()).parseQuestions());
     }
 
     @Test
     public void whenParseEmptyFileThenEmptyQuestionsListIsReturned() {
         Collection<Question> questions = new CsvFileQuestionsParser(
-                new DefaultResourceLoader().getResource("data/empty-file.csv"))
+                new DefaultResourceLoader().getResource("data/empty-file.csv"), new QuestionParserImpl())
                 .parseQuestions();
 
         assertNotNull(questions);
@@ -30,7 +30,7 @@ class CsvFileQuestionsParserTest {
     @Test
     public void whenTextWithoutSemicolonFreeAnswerQuestionIsReturned() {
         Collection<Question> questions = new CsvFileQuestionsParser(
-                new DefaultResourceLoader().getResource("data/free-answer.csv"))
+                new DefaultResourceLoader().getResource("data/free-answer.csv"), new QuestionParserImpl())
                 .parseQuestions();
 
         assertNotNull(questions);
@@ -45,7 +45,7 @@ class CsvFileQuestionsParserTest {
     @Test
     public void whenTextWithSemicolonQuestionWithAnswersIsReturned() {
         Collection<Question> questions = new CsvFileQuestionsParser(
-                new DefaultResourceLoader().getResource("data/question-with-answers.csv"))
+                new DefaultResourceLoader().getResource("data/question-with-answers.csv"), new QuestionParserImpl())
                 .parseQuestions();
 
         assertNotNull(questions);
@@ -63,7 +63,7 @@ class CsvFileQuestionsParserTest {
     @Test
     public void whenNoCorrectAnswerExceptionIsThrown() {
         assertThrows(FileParseException.class, () -> new CsvFileQuestionsParser(
-                new DefaultResourceLoader().getResource("data/question-without-correct-answer.csv.csv"))
+                new DefaultResourceLoader().getResource("data/question-without-correct-answer.csv.csv"), new QuestionParserImpl())
                 .parseQuestions());
 
     }

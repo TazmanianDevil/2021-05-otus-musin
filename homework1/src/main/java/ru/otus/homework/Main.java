@@ -1,14 +1,16 @@
 package ru.otus.homework;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.otus.homework.service.QuestionsPrinter;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import ru.otus.homework.service.TestingSystem;
 
+@ComponentScan
 public class Main {
 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
-        QuestionsPrinter questionsPrinter = context.getBean(QuestionsPrinter.class);
-        questionsPrinter.printQuestion();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
+        TestingSystem testingSystem = context.getBean(TestingSystem.class);
+        testingSystem.test();
     }
 
 }
