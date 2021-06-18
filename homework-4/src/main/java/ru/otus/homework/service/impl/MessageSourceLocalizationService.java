@@ -15,10 +15,12 @@ public class MessageSourceLocalizationService implements LocalizationService {
     private final MessageSource messageSource;
     private final TestingSystemConfiguration configuration;
 
+    @Override
     public String getLocalizedMessage(String source) {
         return messageSource.getMessage(source, new Object[]{}, Locale.forLanguageTag(configuration.getLocale()));
     }
 
+    @Override
     public String getLocalizedMessage(String source, Object[] parameters) {
         return messageSource.getMessage(source, parameters, Locale.forLanguageTag(configuration.getLocale()));
     }

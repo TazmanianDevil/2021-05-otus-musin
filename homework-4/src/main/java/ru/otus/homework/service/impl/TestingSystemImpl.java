@@ -18,8 +18,14 @@ public class TestingSystemImpl implements TestingSystem {
     private final TestingEngine testingEngine;
     private final OutputService outputService;
 
+    @Override
     public void test() {
         User user = inputService.getUserData();
+        test(user);
+    }
+
+    @Override
+    public void test(User user) {
         Collection<Question> questions = fileParser.parseQuestions();
         TestingResult testingResult = testingEngine.test(questions);
         outputService.printResults(user.getFullName(), testingResult);

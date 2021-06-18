@@ -17,6 +17,9 @@ public class AnswerUtils {
         if (StringUtils.isEmpty(userAnswer)) {
             return false;
         }
+        if (question.isFreeAnswer()) {
+            return true;
+        }
         Optional<Answer> correctAnswer = question.getAnswers().stream()
                 .filter(answer -> StringUtils.contains(answer.getAnswer(), userAnswer))
                 .findFirst();

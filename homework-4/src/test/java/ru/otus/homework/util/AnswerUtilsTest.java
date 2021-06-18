@@ -38,6 +38,13 @@ class AnswerUtilsTest {
         Question question = mock(Question.class);
         when(question.getAnswers()).thenReturn(Collections.singletonList(new Answer("Correct answer", true)));
         assertThat(AnswerUtils.isCorrectAnswer(question, "Correct answer")).isTrue();
+    }
 
+    @Test
+    public void whenAnswerIsFreeThenAnyUserAnswerIsCorrect() {
+        Question question = mock(Question.class);
+        when(question.isFreeAnswer()).thenReturn(true);
+
+        assertThat(AnswerUtils.isCorrectAnswer(question, "Some string")).isTrue();
     }
 }
