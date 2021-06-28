@@ -10,6 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>homework-1</artifactId>
+    <name>Testing system 1,2. Native Spring</name>
+    <description>Students testing system using Native Spring</description>
 
     <dependencies>
         <dependency>

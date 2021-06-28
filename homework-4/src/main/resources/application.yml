@@ -1,0 +1,13 @@
+spring:
+  messages:
+    basename: i18n/messages
+
+testing:
+  filePath: data/questions
+  fileExtension: csv
+  answers:
+    total: 3
+    correct: 2
+  locale: ru
+
+
