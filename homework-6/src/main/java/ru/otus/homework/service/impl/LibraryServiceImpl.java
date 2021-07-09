@@ -1,0 +1,74 @@
+package ru.otus.homework.service.impl;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import ru.otus.homework.model.Book;
+import ru.otus.homework.model.Comment;
+import ru.otus.homework.model.exception.WrongBookException;
+import ru.otus.homework.service.BookService;
+import ru.otus.homework.service.CommentService;
+import ru.otus.homework.service.LibraryService;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class LibraryServiceImpl implements LibraryService {
+    private final CommentService commentService;
+    private final BookService bookService;
+
+    @Override
+    public Comment createComment(Comment comment) {
+        final Book book = bookService.getById(comment.getBook().getId());
+        if (book == null) {
+            throw new WrongBookException();
+        }
+        comment.setBook(book);
+        return commentService.create(comment);
+    }
+
+    @Override
+    public Book getBookById(long id) {
+        return bookService.getById(id);
+    }
+
+    @Override
+    public List<Book> getAllBooks() {
+        return bookService.getAll();
+    }
+
+    @Override
+    public Book createBook(Book book) {
+        return bookService.create(book);
+    }
+
+    @Override
+    public void deleteBookById(long id) {
+        bookService.deleteById(id);
+    }
+
+    @Override
+    public Book updateBook(Book book) {
+        return bookService.update(book);
+    }
+
+    @Override
+    public Comment getCommentById(long id) {
+        return commentService.getById(id);
+    }
+
+    @Override
+    public List<Comment> getAllCommentsByBookId(long bookId) {
+        return commentService.getAllByBookId(bookId);
+    }
+
+    @Override
+    public void deleteCommentById(long id) {
+        commentService.deleteById(id);
+    }
+
+    @Override
+    public Comment updateComment(Comment comment) {
+        return commentService.update(comment);
+    }
+}
