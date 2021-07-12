@@ -53,18 +53,6 @@ class CommentServiceImplTest {
     }
 
     @Test
-    public void shouldGetAllByBookId() {
-        List<Comment> expectedComments = new EasyRandom()
-                .objects(Comment.class, 2)
-                .collect(Collectors.toList());
-        when(commentRepository.getAllByBookId(ID)).thenReturn(expectedComments);
-
-        List<Comment> comments = commentRepository.getAllByBookId(ID);
-
-        assertThat(comments).hasSameElementsAs(expectedComments);
-    }
-
-    @Test
     public void shouldCreateComment() {
         final Comment comment = new Comment(0, TEXT, mock(Book.class));
         when(commentRepository.create(comment)).thenReturn(comment);

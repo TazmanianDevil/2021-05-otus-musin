@@ -2,6 +2,7 @@ package ru.otus.homework.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.homework.dao.BookRepository;
 import ru.otus.homework.dao.impl.JpaCommentRepository;
 import ru.otus.homework.model.Book;
@@ -15,26 +16,25 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
     private final JpaCommentRepository commentRepository;
 
+    @Transactional
     @Override
     public Comment getById(long id) {
         return commentRepository.getById(id);
     }
 
+    @Transactional
     @Override
     public void deleteById(long id) {
         commentRepository.deleteById(id);
     }
 
-    @Override
-    public List<Comment> getAllByBookId(long id) {
-        return commentRepository.getAllByBookId(id);
-    }
-
+    @Transactional
     @Override
     public Comment create(Comment comment) {
         return commentRepository.create(comment);
     }
 
+    @Transactional
     @Override
     public Comment update(Comment comment) {
         return commentRepository.update(comment);

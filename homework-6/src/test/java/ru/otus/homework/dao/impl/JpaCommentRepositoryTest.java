@@ -24,13 +24,6 @@ class JpaCommentRepositoryTest {
     private JpaCommentRepository commentRepository;
 
     @Test
-    public void shouldGetAllCommentsByBookId() {
-        final List<Comment> books = commentRepository.getAllByBookId(1L);
-
-        assertThat(books).isNotEmpty().hasSize(1);
-    }
-
-    @Test
     public void shouldReturnNullWhenNoCommentWithCurrentId() {
         final Comment comment = commentRepository.getById(Integer.MAX_VALUE);
 

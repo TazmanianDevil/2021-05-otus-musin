@@ -130,15 +130,16 @@ class LibraryServiceImplTest {
 
     @Test
     public void shouldGetAllComments() {
-        when(commentService.getAllByBookId(eq(BOOK_ID))).thenReturn(new EasyRandom()
-                .objects(Comment.class, 2)
+        final Book bookMock = mock(Book.class);
+        when(bookMock.getComments()).thenReturn(new EasyRandom().objects(Comment.class, 2)
                 .collect(Collectors.toList()));
+        when(bookService.getById(eq(BOOK_ID))).thenReturn(bookMock);
 
         final List<Comment> coments = libraryService.getAllCommentsByBookId(BOOK_ID);
 
         assertThat(coments).isNotEmpty();
         assertThat(coments).hasSize(2);
-        verify(commentService, times(1)).getAllByBookId(eq(BOOK_ID));
+        verify(bookService, times(1)).getById(eq(BOOK_ID));
     }
 
 

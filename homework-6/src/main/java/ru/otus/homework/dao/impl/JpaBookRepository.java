@@ -1,7 +1,7 @@
 package ru.otus.homework.dao.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import ru.otus.homework.dao.BookRepository;
 import ru.otus.homework.model.Book;
 
@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Repository
+@Service
 @RequiredArgsConstructor
 public class JpaBookRepository implements BookRepository {
 

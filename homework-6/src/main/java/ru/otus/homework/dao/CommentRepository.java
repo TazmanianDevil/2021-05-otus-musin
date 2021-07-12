@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface CommentRepository {
 
-    List<Comment> getAllByBookId(long id);
-
     Comment getById(long id);
 
     Comment update(Comment comment);
