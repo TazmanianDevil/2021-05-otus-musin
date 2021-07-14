@@ -68,7 +68,9 @@ public class LibraryServiceImpl implements LibraryService {
     @Transactional(readOnly = true)
     @Override
     public List<Comment> getAllCommentsByBookId(long bookId) {
-        return bookService.getById(bookId).getComments();
+        final List<Comment> comments = bookService.getById(bookId).getComments();
+        comments.size();
+        return comments;
     }
 
     @Transactional

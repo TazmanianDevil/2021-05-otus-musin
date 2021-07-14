@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.homework.model.Book;
 import ru.otus.homework.model.Comment;
 import ru.otus.homework.service.LibraryService;
@@ -15,9 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LibraryCommands {
 
-//    private final BookService bookService;
     private final UserInputService inputService;
-//    private final CommentService commentService;
     private final LibraryService libraryService;
 
     @ShellMethod(value = "Get book by id", key = {"book", "b", "gb", "get book"})
