@@ -2,6 +2,7 @@ package ru.otus.homework.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.homework.model.Author;
 import ru.otus.homework.model.Book;
 import ru.otus.homework.model.Comment;
@@ -49,6 +50,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void deleteBookById(String id) {
+        commentService.deleteByBookId(id);
         bookService.deleteById(id);
     }
 

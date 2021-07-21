@@ -111,10 +111,12 @@ class LibraryServiceImplTest {
     @Test
     public void shouldDeleteBookById() {
         doNothing().when(bookService).deleteById(eq(BOOK_ID));
+        doNothing().when(commentService).deleteByBookId(BOOK_ID);
 
         libraryService.deleteBookById(BOOK_ID);
 
         verify(bookService, times(1)).deleteById(eq(BOOK_ID));
+        verify(commentService, times(1)).deleteByBookId(eq(BOOK_ID));
     }
 
     @Test
@@ -177,5 +179,4 @@ class LibraryServiceImplTest {
 
         verify(commentService, times(1)).deleteById(eq(COMMENT_ID));
     }
-
 }

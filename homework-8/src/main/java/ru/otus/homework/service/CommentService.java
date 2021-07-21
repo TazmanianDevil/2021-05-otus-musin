@@ -13,4 +13,6 @@ public interface CommentService {
     List<Comment> findAllByBookId(String bookId);
 
     void deleteById(String id);
+
+    void deleteByBookId(String bookId);
 }

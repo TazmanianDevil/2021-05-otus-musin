@@ -18,17 +18,17 @@ public class Book {
     private String title;
     private Author author;
     private Genre genre;
-    private List<Comment> comments;
+//    private List<Comment> comments;
 
     public Book(String id) {
         this.id = id;
     }
 
-    public Book(String id, String title, Author author, Genre genre) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
-    }
+//    public Book(String id, String title, Author author, Genre genre) {
+//        this.id = id;
+//        this.title = title;
+//        this.author = author;
+//        this.genre = genre;
+//    }
 }
 
