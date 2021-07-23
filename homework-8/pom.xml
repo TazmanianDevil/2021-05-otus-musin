@@ -63,6 +63,7 @@
 			<groupId>org.jeasy</groupId>
 			<artifactId>easy-random-core</artifactId>
 			<version>${easy-random-core.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

@@ -2,6 +2,8 @@ package ru.otus.homework.service;
 
 import ru.otus.homework.model.Book;
 import ru.otus.homework.model.Comment;
+import ru.otus.homework.model.SaveCommentRequest;
+import ru.otus.homework.model.UpdateCommentRequest;
 
 import java.util.List;
 
@@ -15,11 +17,13 @@ public interface LibraryService {
 
     void deleteBookById(String id);
 
-    Comment saveComment(Comment comment);
-
-    Comment findCommentById(String id);
+    void saveComment(SaveCommentRequest request);
 
     List<Comment> findCommentsByBookId(String bookId);
 
-    void deleteCommentById(String id);
+    void deleteCommentByBookId(String bookId, String commentText);
+
+    void deleteAllCommentsByBookId(String id);
+
+    void updateComment(UpdateCommentRequest request);
 }

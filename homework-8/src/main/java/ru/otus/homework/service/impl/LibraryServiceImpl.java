@@ -1,19 +1,19 @@
 package ru.otus.homework.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import ru.otus.homework.model.Author;
-import ru.otus.homework.model.Book;
-import ru.otus.homework.model.Comment;
-import ru.otus.homework.model.Genre;
+import ru.otus.homework.model.*;
 import ru.otus.homework.model.exception.AuthorNotFoundException;
 import ru.otus.homework.model.exception.BookNotFoundException;
-import ru.otus.homework.model.exception.CommentNotFoundException;
 import ru.otus.homework.model.exception.GenreNotFoundException;
-import ru.otus.homework.service.*;
+import ru.otus.homework.service.AuthorService;
+import ru.otus.homework.service.BookService;
+import ru.otus.homework.service.GenreService;
+import ru.otus.homework.service.LibraryService;
 import ru.otus.homework.util.ModelUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +23,6 @@ public class LibraryServiceImpl implements LibraryService {
     private final BookService bookService;
     private final AuthorService authorService;
     private final GenreService genreService;
-    private final CommentService commentService;
 
     @Override
     public Book findBookById(String id) {
@@ -50,31 +49,54 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void deleteBookById(String id) {
-        commentService.deleteByBookId(id);
         bookService.deleteById(id);
     }
 
-    @Override
-    public Comment saveComment(Comment comment) {
-        final Optional<Book> bookOptional = bookService.findById(comment.getBookId());
+    public void saveComment(SaveCommentRequest request) {
+        final Optional<Book> bookOptional = bookService.findById(request.getBookId());
         ModelUtil.checkEntity(bookOptional, BookNotFoundException.class);
-        return commentService.save(comment);
-    }
-
-    @Override
-    public Comment findCommentById(String id) {
-        final Optional<Comment> commentOptional = commentService.findById(id);
-        ModelUtil.checkEntity(commentOptional, CommentNotFoundException.class);
-        return commentOptional.get();
+        final Book book = bookOptional.get();
+        if (book.getComments() == null) {
+            book.setComments(new ArrayList<>());
+        }
+        book.getComments().add(new Comment(request.getText()));
+        bookService.save(book);
     }
 
     @Override
     public List<Comment> findCommentsByBookId(String bookId) {
-        return commentService.findAllByBookId(bookId);
+        final Optional<Book> bookOptional = bookService.findById(bookId);
+        ModelUtil.checkEntity(bookOptional, BookNotFoundException.class);
+        return bookOptional.get().getComments();
     }
 
     @Override
-    public void deleteCommentById(String id) {
-        commentService.deleteById(id);
+    public void deleteCommentByBookId(String bookId, String commentText) {
+        final Optional<Book> bookOptional = bookService.findById(bookId);
+        ModelUtil.checkEntity(bookOptional, BookNotFoundException.class);
+        final Book book = bookOptional.get();
+        book.getComments()
+                .removeIf(comment -> StringUtils.equals(commentText, comment.getText()));
+        bookService.save(book);
+    }
+
+    @Override
+    public void deleteAllCommentsByBookId(String id) {
+        final Optional<Book> bookOptional = bookService.findById(id);
+        ModelUtil.checkEntity(bookOptional, BookNotFoundException.class);
+        final Book book = bookOptional.get();
+        book.getComments().clear();
+        bookService.save(book);
+    }
+
+    @Override
+    public void updateComment(UpdateCommentRequest request) {
+        final Optional<Book> bookOptional = bookService.findById(request.getBookId());
+        ModelUtil.checkEntity(bookOptional, BookNotFoundException.class);
+        final Book book = bookOptional.get();
+        if (book.getComments().removeIf(comment -> StringUtils.equals(request.getOldText(), comment.getText()))) {
+            book.getComments().add(new Comment(request.getNewText()));
+        }
+        bookService.save(book);
     }
 }

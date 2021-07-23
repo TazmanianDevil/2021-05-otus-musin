@@ -3,22 +3,19 @@ package ru.otus.homework.service.impl;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import ru.otus.homework.model.Author;
-import ru.otus.homework.model.Book;
-import ru.otus.homework.model.Comment;
-import ru.otus.homework.model.Genre;
+import ru.otus.homework.model.*;
 import ru.otus.homework.model.exception.AuthorNotFoundException;
 import ru.otus.homework.model.exception.BookNotFoundException;
-import ru.otus.homework.model.exception.CommentNotFoundException;
 import ru.otus.homework.model.exception.GenreNotFoundException;
 import ru.otus.homework.service.AuthorService;
 import ru.otus.homework.service.BookService;
-import ru.otus.homework.service.CommentService;
 import ru.otus.homework.service.GenreService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,8 +39,6 @@ class LibraryServiceImplTest {
     private AuthorService authorService;
     @Mock
     private GenreService genreService;
-    @Mock
-    private CommentService commentService;
 
     @InjectMocks
     private LibraryServiceImpl libraryService;
@@ -111,72 +106,47 @@ class LibraryServiceImplTest {
     @Test
     public void shouldDeleteBookById() {
         doNothing().when(bookService).deleteById(eq(BOOK_ID));
-        doNothing().when(commentService).deleteByBookId(BOOK_ID);
 
         libraryService.deleteBookById(BOOK_ID);
 
         verify(bookService, times(1)).deleteById(eq(BOOK_ID));
-        verify(commentService, times(1)).deleteByBookId(eq(BOOK_ID));
     }
 
     @Test
     public void shouldThrowExceptionWhenBookIsNotFound() {
         when(bookService.findById(anyString())).thenReturn(Optional.empty());
-        Comment comment = new Comment(null, COMMENT_TEXT, BOOK_ID);
+        SaveCommentRequest request = new SaveCommentRequest(COMMENT_TEXT, BOOK_ID);
 
-        assertThatThrownBy(() -> libraryService.saveComment(comment))
+        assertThatThrownBy(() -> libraryService.saveComment(request))
                 .isInstanceOf(BookNotFoundException.class)
                 .hasMessage("Book not found in Library");
         verify(bookService, times(1)).findById(anyString());
-        verify(commentService, times(0)).save(eq(comment));
+        verify(bookService, times(0)).save(any(Book.class));
     }
 
     @Test
     public void shouldSaveComment() {
-        when(bookService.findById(eq(BOOK_ID))).thenReturn(Optional.of(mock(Book.class)));
-        Comment comment = new Comment(null, COMMENT_TEXT, BOOK_ID);
-        when(commentService.save(any(Comment.class))).thenReturn(comment);
+        when(bookService.findById(eq(BOOK_ID))).thenReturn(Optional.of(new Book(BOOK_ID, BOOK_TITLE, new Author(AUTHOR_ID),
+                new Genre(GENRE_ID), new ArrayList<>())));
+        SaveCommentRequest request = new SaveCommentRequest(COMMENT_TEXT, BOOK_ID);
 
-        final Comment savedComment = libraryService.saveComment(comment);
-        assertThat(savedComment).isNotNull()
-                .usingRecursiveComparison().isEqualTo(comment);
-        verify(bookService, times(1)).findById(comment.getBookId());
-        verify(commentService, times(1)).save(eq(comment));
-    }
+        libraryService.saveComment(request);
 
-    @Test
-    public void shouldThrowExceptionWhenCommentHasNotFound() {
-        when(commentService.findById(eq(COMMENT_ID))).thenReturn(Optional.empty());
-
-        assertThatThrownBy(() -> libraryService.findCommentById(COMMENT_ID)).isInstanceOf(CommentNotFoundException.class)
-                .hasMessage("Comment not found");
-        verify(commentService, times(1)).findById(eq(COMMENT_ID));
-    }
-
-    @Test
-    public void shouldFindCommentById() {
-        when(commentService.findById(eq(COMMENT_ID))).thenReturn(Optional.of(mock(Comment.class)));
-
-        final Comment comment = libraryService.findCommentById(COMMENT_ID);
-        assertThat(comment).isNotNull();
+        verify(bookService, times(1)).findById(request.getBookId());
+        final ArgumentCaptor<Book> captor = ArgumentCaptor.forClass(Book.class);
+        verify(bookService, times(1)).save(captor.capture());
+        assertThat(captor.getValue().getComments()).hasSize(1);
     }
 
     @Test
     public void shouldFindAllCommentsByBookId() {
-        when(commentService.findAllByBookId(eq(BOOK_ID))).thenReturn(new EasyRandom().objects(Comment.class, 2)
-                .collect(Collectors.toList()));
+        when(bookService.findById(eq(BOOK_ID))).thenReturn(Optional.of(new Book(BOOK_ID, BOOK_TITLE, new Author(AUTHOR_ID),
+                new Genre(GENRE_ID), new EasyRandom().objects(Comment.class, 2)
+                .collect(Collectors.toList()))));
 
         final List<Comment> comments = libraryService.findCommentsByBookId(BOOK_ID);
 
         assertThat(comments).hasSize(2);
     }
 
-    @Test
-    public void shouldDeleteCommentById() {
-        doNothing().when(commentService).deleteById(eq(COMMENT_ID));
-
-        libraryService.deleteCommentById(COMMENT_ID);
-
-        verify(commentService, times(1)).deleteById(eq(COMMENT_ID));
-    }
 }

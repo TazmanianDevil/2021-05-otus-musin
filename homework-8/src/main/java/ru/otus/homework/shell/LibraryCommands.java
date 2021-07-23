@@ -6,6 +6,8 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 import ru.otus.homework.model.Book;
 import ru.otus.homework.model.Comment;
+import ru.otus.homework.model.SaveCommentRequest;
+import ru.otus.homework.model.UpdateCommentRequest;
 import ru.otus.homework.service.LibraryService;
 import ru.otus.homework.service.UserInputService;
 
@@ -50,14 +52,9 @@ public class LibraryCommands {
 
     @ShellMethod(value = "Add comment to book", key = {"add comment", "ac"})
     public String addComment() {
-        Comment comment = inputService.getCommentForCreate();
-        libraryService.saveComment(comment);
-        return "Comment has been saved! New comment id: " + comment.getId();
-    }
-
-    @ShellMethod(value = "Get comment by id", key = {"comment", "c", "gc", "get comment"})
-    public Comment getComment(@ShellOption String id) {
-        return libraryService.findCommentById(id);
+        SaveCommentRequest request = inputService.getCommentForCreate();
+        libraryService.saveComment(request);
+        return "Comment has been saved!";
     }
 
     @ShellMethod(value = "Get all comments by book id", key = {"comments", "cs", "gcs", "get comments"})
@@ -66,15 +63,21 @@ public class LibraryCommands {
     }
 
     @ShellMethod(value = "Delete comment for book", key = {"delete comment", "dc"})
-    public String deleteComment(@ShellOption String id) {
-        libraryService.deleteCommentById(id);
+    public String deleteComment(@ShellOption String bookId, @ShellOption String commentId) {
+        libraryService.deleteCommentByBookId(bookId, commentId);
         return "Comment has been deleted!";
     }
 
+    @ShellMethod(value = "Delete all comments for book", key = {"delete all comments", "dac"})
+    public String deleteAllCommentsByBookId(@ShellOption String bookId) {
+        libraryService.deleteAllCommentsByBookId(bookId);
+        return "Comments have been deleted!";
+    }
+
     @ShellMethod(value = "Edit comment for book", key = {"update comment", "uc"})
-    public String editComment() {
-        Comment comment = inputService.getCommentForUpdate();
-        libraryService.saveComment(comment);
+    public String updateCommentByBookId() {
+        UpdateCommentRequest request = inputService.getCommentForUpdate();
+        libraryService.updateComment(request);
         return "Comment has been updated!";
     }
 }

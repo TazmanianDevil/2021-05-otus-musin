@@ -2,10 +2,7 @@ package ru.otus.homework.service.impl;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import ru.otus.homework.model.Author;
-import ru.otus.homework.model.Book;
-import ru.otus.homework.model.Comment;
-import ru.otus.homework.model.Genre;
+import ru.otus.homework.model.*;
 import ru.otus.homework.service.UserInputService;
 
 import java.util.Scanner;
@@ -32,18 +29,18 @@ public class ConsoleUserInputService implements UserInputService {
     }
 
     @Override
-    public Comment getCommentForCreate() {
+    public SaveCommentRequest getCommentForCreate() {
         String bookId = getText("Enter book's id, please: ");
         String text = getText("Enter your comment, please: ");
-        return new Comment(null, text, bookId);
+        return new SaveCommentRequest(text, bookId);
     }
 
     @Override
-    public Comment getCommentForUpdate() {
-        String commentId = getText("Enter comment's id, please:");
-        String text = getText("Enter comment's text, please: ");
+    public UpdateCommentRequest getCommentForUpdate() {
         String bookId = getText("Enter book's id, please: ");
-        return new Comment(commentId, text, bookId);
+        String oldText = getText("Enter comment's old text, please:");
+        String newText = getText("Enter comment's new text, please: ");
+        return new UpdateCommentRequest(bookId, oldText, newText);
     }
 
     private String getText(String message) {
