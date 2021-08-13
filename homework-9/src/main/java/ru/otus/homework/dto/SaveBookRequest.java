@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateBookRequest {
+public class SaveBookRequest {
+    private long id;
     private String title;
     private String author;
     private long genre;

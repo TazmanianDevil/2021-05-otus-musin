@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.otus.homework.dto.BookDto;
-import ru.otus.homework.dto.CreateBookRequest;
-import ru.otus.homework.dto.EditBookRequest;
+import ru.otus.homework.dto.SaveBookRequest;
 import ru.otus.homework.dto.GenreDto;
 import ru.otus.homework.service.LibraryService;
 
@@ -35,7 +34,7 @@ public class BookController {
     }
 
     @PostMapping(value = "/books/create", params = "action=save")
-    public String saveBook(CreateBookRequest request) {
+    public String saveBook(SaveBookRequest request) {
         libraryService.createBook(request);
         return "redirect:/books";
     }
@@ -56,7 +55,7 @@ public class BookController {
 
     @PostMapping(value = "/books/edit", params = "action=update")
     public String updateBook(
-            EditBookRequest request
+            SaveBookRequest request
     ) {
         libraryService.updateBook(request);
         return "redirect:/books";

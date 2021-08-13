@@ -5,9 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import ru.otus.homework.dto.BookDto;
-import ru.otus.homework.dto.CreateBookRequest;
-import ru.otus.homework.dto.EditBookRequest;
 import ru.otus.homework.dto.GenreDto;
+import ru.otus.homework.dto.SaveBookRequest;
 import ru.otus.homework.mapper.BookMapper;
 import ru.otus.homework.mapper.GenreMapper;
 import ru.otus.homework.model.Author;
@@ -113,7 +112,7 @@ class LibraryServiceImplTest {
 
         when(bookService.create(any(Book.class))).thenReturn(mock(Book.class));
 
-        final BookDto bookDto = libraryService.createBook(new CreateBookRequest(TEXT, FULL_NAME, GENRE_ID));
+        final BookDto bookDto = libraryService.createBook(new SaveBookRequest(0, TEXT, FULL_NAME, GENRE_ID));
 
         final ArgumentCaptor<Book> bookCaptor = ArgumentCaptor.forClass(Book.class);
         assertThat(bookDto).isNotNull();
@@ -133,7 +132,7 @@ class LibraryServiceImplTest {
     public void shouldThrowExceptionWhenBookIsAbsentWhenUpdatingBook() {
         when(bookService.getById(BOOK_ID)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() ->libraryService.updateBook(new EditBookRequest(BOOK_ID, TEXT, FULL_NAME, GENRE_ID)))
+        assertThatThrownBy(() -> libraryService.updateBook(new SaveBookRequest(BOOK_ID, TEXT, FULL_NAME, GENRE_ID)))
                 .isInstanceOf(WrongBookException.class);
     }
 
@@ -148,7 +147,7 @@ class LibraryServiceImplTest {
 
         when(bookService.update(any(Book.class))).thenReturn(mock(Book.class));
 
-        final BookDto bookDto = libraryService.updateBook(new EditBookRequest(BOOK_ID, TEXT, FULL_NAME, GENRE_ID));
+        final BookDto bookDto = libraryService.updateBook(new SaveBookRequest(BOOK_ID, TEXT, FULL_NAME, GENRE_ID));
 
         final ArgumentCaptor<Book> bookCaptor = ArgumentCaptor.forClass(Book.class);
         assertThat(bookDto).isNotNull();

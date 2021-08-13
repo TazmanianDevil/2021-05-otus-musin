@@ -15,12 +15,13 @@ import java.util.Optional;
 public class GenreServiceImpl implements GenreService {
     private final GenreRepository genreRepository;
 
-    @Transactional
+    @Transactional (readOnly = true)
     @Override
     public Optional<Genre> getById(long id) {
         return genreRepository.findById(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Genre> getAll() {
         return genreRepository.findAll();

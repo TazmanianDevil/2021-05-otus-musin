@@ -4,9 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.homework.dto.BookDto;
-import ru.otus.homework.dto.CreateBookRequest;
-import ru.otus.homework.dto.EditBookRequest;
 import ru.otus.homework.dto.GenreDto;
+import ru.otus.homework.dto.SaveBookRequest;
 import ru.otus.homework.mapper.BookMapper;
 import ru.otus.homework.mapper.GenreMapper;
 import ru.otus.homework.model.Author;
@@ -54,7 +53,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Transactional
     @Override
-    public BookDto createBook(CreateBookRequest request) {
+    public BookDto createBook(SaveBookRequest request) {
         Author author = getOrCreateAuthor(request.getAuthor());
 
         Optional<Genre> genreOptional = genreService.getById(request.getGenre());
@@ -73,7 +72,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Transactional
     @Override
-    public BookDto updateBook(EditBookRequest bookDto) {
+    public BookDto updateBook(SaveBookRequest bookDto) {
         final Optional<Book> bookOptional = bookService.getById(bookDto.getId());
         ModelUtil.checkEntity(bookOptional, WrongBookException.class);
 

@@ -14,17 +14,19 @@ import java.util.Optional;
 public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
 
-    @Transactional
+    @Transactional (readOnly = true)
     @Override
     public Optional<Author> getById(long id) {
         return authorRepository.findById(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<Author> getByFullName(String fullName) {
         return Optional.ofNullable(authorRepository.findByFullName(fullName));
     }
 
+    @Transactional
     @Override
     public Author create(String fullName) {
         return authorRepository.save(new Author(fullName));
