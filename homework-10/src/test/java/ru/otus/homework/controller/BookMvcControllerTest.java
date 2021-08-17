@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import ru.otus.homework.controller.mvc.BookMvcController;
 import ru.otus.homework.dto.BookDto;
 import ru.otus.homework.service.LibraryService;
 
@@ -15,8 +16,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(BookController.class)
-class BookControllerTest {
+@WebMvcTest(BookMvcController.class)
+class BookMvcControllerTest {
     private static final long BOOK_ID = 42;
     @Autowired
     private MockMvc mvc;
