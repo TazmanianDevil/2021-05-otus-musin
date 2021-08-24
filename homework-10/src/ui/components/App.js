@@ -1,49 +1,23 @@
-import React from 'react'
+import React from 'react';
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import BookList from "./routes/BookList";
+import SaveBook from "./routes/SaveBook";
 
-const Header = (props) => (
-    <h1>{props.title}</h1>
-);
+function App() {
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <Switch>
+                    <Route path={"/"} exact>
+                        <BookList/>
+                    </Route>
+                    <Route path={"/saveBook"}>
+                        <SaveBook/>
+                    </Route>
+                </Switch>
+            </BrowserRouter>
+        </div>
+    );
+}
 
-export default class App extends React.Component {
-
-    constructor() {
-        super();
-        this.state = {books: []};
-    }
-
-    componentDidMount() {
-        fetch('/api/books')
-            .then(response => response.json())
-            .then(books => this.setState({books}));
-    }
-
-    render() {
-        return (
-            <React.Fragment>
-                <Header title={'Books'}/>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Author</th>
-                        <th>Genre</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.state.books.map((book, i) => (
-                            <tr key={i}>
-                                <td>{book.id}</td>
-                                <td>{book.title}</td>
-                                <td>{book.author}</td>
-                                <td>{book.genre}</td>
-                            </tr>
-                        ))
-                    }
-                    </tbody>
-                </table>
-            </React.Fragment>
-        )
-    }
-};
+export default App;
