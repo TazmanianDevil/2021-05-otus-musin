@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
+import {ADD_NEW_BOOK} from "./BookEdit";
 
 
 function BookList() {
 
     const [books, setBooks] = useState([]);
+
     useEffect(() => {
         fetch('/api/books')
             .then(response => response.json())
@@ -44,13 +46,14 @@ function BookList() {
                             <td>{book.title}</td>
                             <td>{book.author}</td>
                             <td>{book.genre}</td>
+                            <td><Link to={`/books/${book.id}`}><button>Edit</button></Link> </td>
                             <td><button onClick={() => remove(book.id)}>Remove</button> </td>
                         </tr>
                     ))
                 }
                 </tbody>
             </table>
-            <Link to={"/saveBook"}>Add new Book</Link>
+            <Link to={`/books/${ADD_NEW_BOOK}`}>Add new Book</Link>
         </div>
     )
 }

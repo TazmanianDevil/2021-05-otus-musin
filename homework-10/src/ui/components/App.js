@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import BookList from "./routes/BookList";
-import SaveBook from "./routes/SaveBook";
+import BookEdit from "./routes/BookEdit";
 
 function App() {
     return (
@@ -11,8 +11,8 @@ function App() {
                     <Route path={"/"} exact>
                         <BookList/>
                     </Route>
-                    <Route path={"/saveBook"}>
-                        <SaveBook/>
+                    <Route path={"/books/:id"}>
+                        <BookEdit/>
                     </Route>
                 </Switch>
             </BrowserRouter>

@@ -26,4 +26,8 @@ public class BookController {
         libraryService.deleteBookById(id);
     }
 
+    @GetMapping("/api/books/{id}")
+    public BookDto getBook(@PathVariable("id") long id) {
+        return libraryService.getBookById(id);
+    }
 }
