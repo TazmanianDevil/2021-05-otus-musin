@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library. Books</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>Books in Library</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+<script>
+    $(function () {
+        $.get('/api/books').done(function (books) {
+            books.forEach(function (book) {
+                $('tbody').append(`
+                    <tr>
+                        <td>${book.title}</td>
+                        <td>${book.author}</td>
+                        <td>${book.genre}</td>
+                        <td><a href="/books/edit?id=${book.id}"><img src="images/edit.png"></a></td>
+                        <td><a href="/books/delete?id=${book.id}"><img src="images/delete.png"></a></td>
+                    </tr>
+                `)
+            });
+        })
+    });
+</script>
+<a class="button" href="saveBook.html" th:href="@{/books/create}">Add book</a>
+</body>
+</html>
