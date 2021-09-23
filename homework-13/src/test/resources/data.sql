@@ -1,0 +1,17 @@
+INSERT INTO GENRES (NAME)
+VALUES ('fantasy');
+
+INSERT INTO AUTHORS (FULL_NAME)
+VALUES ('Stanislav Herman Lem');
+
+INSERT INTO BOOKS (TITLE, AUTHOR_ID, GENRE_ID)
+VALUES ('Solaris', 1, 1);
+
+INSERT INTO COMMENTS(TEXT, BOOK_ID)
+VALUES ('COMMENT', 1);
+
+INSERT INTO USERS (NAME, PASSWORD, AUTHORITY)
+VALUES
+('reader', 'reader', 'READER'),
+('editor', 'editor', 'EDITOR'),
+('admin', 'admin', 'ADMIN');
