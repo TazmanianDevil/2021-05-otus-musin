@@ -1,0 +1,35 @@
+spring:
+  data:
+    mongodb:
+      port: 0
+      database: library
+  datasource:
+    url: jdbc:h2:mem:testdb
+    initialization-mode: always
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+
+  h2:
+    console:
+      path: /h2-console
+      settings:
+        web-allow-others: true
+
+  batch:
+    job:
+      enabled: false
+
+mongock:
+  #  runner-type: "ApplicationRunner" # default
+  runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - ru.otus.homework.mongock.changelog
+  mongo-db:
+    write-concern:
+      journal: false
+    read-concern: local
