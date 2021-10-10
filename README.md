@@ -15,4 +15,6 @@ homework-11 - Библиотека книг. Реализация приложе
 homework-12 - Библиотека книг. Реализация form-based аутентификации
 homework-13 - Библиотека книг. Реализация url авторизации 
 homework-14 - Библиотека книг. Реализация миграции БД с использованием Spring Batch
+homework-16 - Spring EIP
+homework-14 - Библиотека книг. Подключение Spring Boot Actuator
 
