@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    # Эти свойства будут перегружены свойствами в docker-compose.yml
+    url: jdbc:tc:postgresql://localhost:5432/db
+    username: test
+    password: test
+    initialization-mode: always
+    data: classpath*:data.sql
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+logging:
+  level:
+    ROOT: DEBUG

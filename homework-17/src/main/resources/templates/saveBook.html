@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add new book</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+
+<form id="edit-form" th:action="@{/books/save}" th:method="post">
+    <h1>Add new book info:</h1>
+
+    <div th:if="${book != null}" class="row" hidden>
+        <input id="id-input" type="text" name="id" th:value="${book.id}" value="" readonly/>
+    </div>
+
+    <div class="row">
+        <label for="title-input">Title:</label>
+        <input id="title-input" type="text" name="title"
+               th:value="${book != null && book.id != 0} ? ${book.title} : ''"/>
+    </div>
+
+    <div class="row">
+        <label for="author-input">Author: </label>
+        <input id="author-input" name="author" type="text"
+               th:value="${book != null && book.id != 0} ? ${book.author} : ''"/>
+    </div>
+
+    <div class="row">
+        <label for="genre-input">Genre</label>
+        <select id="genre-input" class="book_selector" name="genre" form="edit-form">
+            <option th:each="genre: ${genres}"
+                    th:value="${genre.id}"
+                    th:text="${genre.name}"
+                    th:selected="${genre}">Genre
+            </option>
+        </select>
+    </div>
+
+    <div class="row">
+        <button type="submit" name="action" value="save">Save</button>
+        <button type="submit" name="action" value="cancel">Cancel</button>
+    </div>
+</form>
+
+</body>
+</html>
