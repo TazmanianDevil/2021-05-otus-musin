@@ -21,6 +21,7 @@
         <module>homework-12</module>
         <module>homework-13</module>
         <module>homework-14</module>
+        <module>hystrix-dashboard</module>
     </modules>
     <packaging>pom</packaging>
 
