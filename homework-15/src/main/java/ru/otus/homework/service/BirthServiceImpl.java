@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 @Service
 @Slf4j
 public class BirthServiceImpl implements BirthService {
-    private static final String[] BUTTERFLY_NAMES = {"b1", "b2", "b3", "b4", "b5"};
+    private static final String[] BUTTERFLY_NAMES = {"hives", "cardinal", "swallowtail", "swallowtail", "hawk maker"};
 
     @Override
     public List<Caterpillar> birth() {
