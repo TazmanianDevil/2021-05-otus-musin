@@ -16,7 +16,7 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
-    @Transactional (readOnly = true)
+    @Transactional(readOnly = true)
     @Override
     public Optional<Book> getById(long id) {
         return bookRepository.findById(id);
@@ -28,7 +28,7 @@ public class BookServiceImpl implements BookService {
         bookRepository.deleteById(id);
     }
 
-    @Transactional (readOnly = true)
+    @Transactional(readOnly = true)
     @Override
     public List<Book> getAll() {
         return bookRepository.findAll();

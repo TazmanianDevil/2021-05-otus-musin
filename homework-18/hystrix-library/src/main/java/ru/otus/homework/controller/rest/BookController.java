@@ -39,7 +39,7 @@ public class BookController {
 
     @GetMapping(value = "/api/books/{id}", produces = "application/json")
     @HystrixCommand(defaultFallback = "defaultBook")
-    public BookDto getById(@PathVariable("id")long id) {
+    public BookDto getById(@PathVariable("id") long id) {
         final BookDto book = libraryService.getBookById(id);
         log.info("book: {}", book);
         return book;

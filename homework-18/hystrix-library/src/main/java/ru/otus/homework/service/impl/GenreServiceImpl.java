@@ -15,7 +15,7 @@ import java.util.Optional;
 public class GenreServiceImpl implements GenreService {
     private final GenreRepository genreRepository;
 
-    @Transactional (readOnly = true)
+    @Transactional(readOnly = true)
     @Override
     public Optional<Genre> getById(long id) {
         return genreRepository.findById(id);

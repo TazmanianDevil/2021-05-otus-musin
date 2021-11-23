@@ -15,7 +15,7 @@ import java.util.Optional;
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
 
-    @Transactional (readOnly = true)
+    @Transactional(readOnly = true)
     @Override
     public Optional<Comment> getById(long id) {
         return commentRepository.findById(id);
@@ -27,7 +27,7 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.deleteById(id);
     }
 
-    @Transactional (readOnly = true)
+    @Transactional(readOnly = true)
     @Override
     public List<Comment> getAllByBookId(long id) {
         return commentRepository.findByBook_Id(id);

@@ -14,5 +14,6 @@
 
     <modules>
         <module>hystrix-library</module>
+        <module>hys</module>
     </modules>
 </project>
