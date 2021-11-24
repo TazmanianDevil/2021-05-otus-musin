@@ -15,7 +15,7 @@ homework-11 - Библиотека книг. Реализация приложе
 homework-12 - Библиотека книг. Реализация form-based аутентификации
 homework-13 - Библиотека книг. Реализация url авторизации 
 homework-14 - Библиотека книг. Реализация миграции БД с использованием Spring Batch
-homework-15 - Spring EIP
+homework-15 - Spring EIP. Трасформация гусениц в бабочек
 homework-16 - Библиотека книг. Подключение Spring Boot Actuator
 homework-17 - Библиотека книг. Подключение Docker
 homework-18 - Библиотека книг. Подключение Hystrix Dashboard
