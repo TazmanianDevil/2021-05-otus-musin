@@ -18,4 +18,5 @@ homework-14 - Библиотека книг. Реализация миграци
 homework-15 - Spring EIP
 homework-16 - Библиотека книг. Подключение Spring Boot Actuator
 homework-17 - Библиотека книг. Подключение Docker
+homework-18 - Библиотека книг. Подключение Hystrix Dashboard
 

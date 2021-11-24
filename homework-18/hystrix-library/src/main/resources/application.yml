@@ -17,11 +17,17 @@ spring:
         web-allow-others: true
   application:
     name: hystrix-library
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: "*"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
 server:
   port: 8081
 eureka:

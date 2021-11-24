@@ -13,7 +13,7 @@
 	<artifactId>library-discover-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>library-discover-service</name>
-	<description>Library project powered by Histryx</description>
+	<description>Library project powered by Hystrix</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -40,17 +40,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<build>
 		<plugins>
