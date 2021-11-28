@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+
+  eurika-server:
+    build:
+      context: online-library-eurika-server
+      dockerfile: Dockerfile
+    ports:
+    - "8001:8001"
