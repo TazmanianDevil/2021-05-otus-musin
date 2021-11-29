@@ -1,6 +1,10 @@
 spring:
   application:
-    name: library-service
+    name: online-library-author-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db
+    username: postgres
+    password: postgres
 server:
   port: 8010
 

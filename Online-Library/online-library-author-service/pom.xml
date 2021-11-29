@@ -10,10 +10,10 @@
 	</parent>
 
 	<groupId>ru.otus</groupId>
-	<artifactId>online-library-service</artifactId>
+	<artifactId>online-library-author-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>online-library-service</name>
-	<description>Online library book service</description>
+	<name>online-library-author-service</name>
+	<description>Online library author service</description>
 	<packaging>jar</packaging>
 	<properties>
 		<java.version>11</java.version>
@@ -42,10 +42,21 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -66,7 +77,7 @@
 	</dependencyManagement>
 
 	<build>
-		<finalName>online-library-service</finalName>
+		<finalName>online-library-author-service</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
