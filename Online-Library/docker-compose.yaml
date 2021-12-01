@@ -2,9 +2,77 @@ version: '3.7'
 
 services:
 
-  eurika-server:
+  online-library-eurika-server:
     build:
       context: online-library-eurika-server
       dockerfile: Dockerfile
     ports:
-    - "8001:8001"
+      - "8001:8001"
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://eureka-server:8001/eureka
+    restart: always
+    networks:
+      - nw
+
+  online-library-author-service:
+    build:
+      context: online-library-author-service
+      dockerfile: Dockerfile
+    ports:
+      - "8010:8010"
+    restart: always
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://eureka-server:8001/eureka
+    depends_on:
+      - online-library-eurika-server
+      - postgres
+    networks:
+      - nw
+
+  online-library-genre-service:
+    build:
+      context: online-library-genre-service
+      dockerfile: Dockerfile
+    ports:
+      - "8011:8011"
+    restart: always
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://eureka-server:8001/eureka
+    depends_on:
+      - online-library-eurika-server
+      - postgres
+    networks:
+      - nw
+
+  online-library-book-service:
+    build:
+      context: online-library-book-service
+      dockerfile: Dockerfile
+    ports:
+      - "8011:8011"
+    restart: always
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://eureka-server:8001/eureka
+    depends_on:
+      - online-library-eurika-server
+      - postgres
+    networks:
+      - nw
+
+  postgres:
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=db
+    networks:
+      - nw
+
+networks:
+  nw:

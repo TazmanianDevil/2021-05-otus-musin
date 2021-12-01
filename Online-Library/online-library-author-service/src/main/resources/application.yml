@@ -1,10 +1,30 @@
 spring:
   application:
     name: online-library-author-service
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/db
+#    username: postgres
+#    password: postgres
+
+#  TEST
   datasource:
-    url: jdbc:postgresql://localhost:5432/db
-    username: postgres
-    password: postgres
+    url: jdbc:h2:mem:testdb
+    initialization-mode: always
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+
+  h2:
+    console:
+      path: /h2-console
+      settings:
+        web-allow-others: true
+
+
 server:
   port: 8010
 
