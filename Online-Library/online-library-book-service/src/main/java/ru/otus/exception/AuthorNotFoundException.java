@@ -1,7 +1,7 @@
-package ru.otus.model;
+package ru.otus.exception;
 
 public class AuthorNotFoundException extends RuntimeException {
     public AuthorNotFoundException() {
-        super("Author must exist");
+        super("Author is absent in library!");
     }
 }

@@ -19,7 +19,7 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public Genre getById(long id) {
         return genreRepository.findById(id)
-                .orElseThrow(GenreNotFoundException::new);
+                .orElseThrow(() -> new GenreNotFoundException(id));
     }
 
     @Transactional(readOnly = true)

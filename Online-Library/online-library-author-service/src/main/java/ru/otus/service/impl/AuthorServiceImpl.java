@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.dao.AuthorRepository;
 import ru.otus.model.Author;
-import ru.otus.model.AuthorNotFoundException;
+import ru.otus.exception.AuthorNotFoundException;
 import ru.otus.service.AuthorService;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Author getById(long id) {
         return authorRepository.findById(id)
-                .orElseThrow(AuthorNotFoundException::new);
+                .orElseThrow(() -> new AuthorNotFoundException(id));
     }
 
     @Transactional(readOnly = true)

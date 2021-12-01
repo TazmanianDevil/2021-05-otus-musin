@@ -1,0 +1,2 @@
+INSERT INTO BOOKS (TITLE, AUTHOR_ID, GENRE_ID) VALUES
+('War and peace', 1, 4);

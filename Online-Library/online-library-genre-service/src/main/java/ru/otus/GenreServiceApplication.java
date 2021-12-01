@@ -13,7 +13,6 @@ public class GenreServiceApplication {
 
     public static void main(String[] args) throws SQLException {
         SpringApplication.run(GenreServiceApplication.class, args);
-        Console.main(args);
     }
 
 }

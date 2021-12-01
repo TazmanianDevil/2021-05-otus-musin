@@ -1,4 +1,4 @@
-package ru.otus.model;
+package ru.otus.exception;
 
 public class WrongAuthorException extends RuntimeException {
     public WrongAuthorException() {

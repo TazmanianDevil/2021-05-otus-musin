@@ -1,13 +1,18 @@
 spring:
   application:
     name: online-library-book-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db
+    username: postgres
+    password: postgres
+
 server:
   port: 8012
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8001/eureka
+      defaultZone: ${EUREKA_SERVER:http://localhost:8001/eureka}
     register-with-eureka: true
     fetch-registry: true
   server:
@@ -28,3 +33,6 @@ management:
   health:
     defaults:
       enabled: true
+feign:
+  httpclient:
+    enabled: true

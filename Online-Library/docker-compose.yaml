@@ -10,7 +10,7 @@ services:
       - "8001:8001"
     environment:
       - JAVA_OPTS=
-        -DEUREKA_SERVER=http://eureka-server:8001/eureka
+        -DEUREKA_SERVER=http://online-library-eurika-server:8001/eureka
     restart: always
     networks:
       - nw
@@ -24,7 +24,7 @@ services:
     restart: always
     environment:
       - JAVA_OPTS=
-        -DEUREKA_SERVER=http://eureka-server:8001/eureka
+        -DEUREKA_SERVER=http://online-library-eurika-server:8001/eureka
     depends_on:
       - online-library-eurika-server
       - postgres
@@ -40,7 +40,7 @@ services:
     restart: always
     environment:
       - JAVA_OPTS=
-        -DEUREKA_SERVER=http://eureka-server:8001/eureka
+        -DEUREKA_SERVER=http://online-library-eurika-server:8001/eureka
     depends_on:
       - online-library-eurika-server
       - postgres
@@ -52,14 +52,32 @@ services:
       context: online-library-book-service
       dockerfile: Dockerfile
     ports:
-      - "8011:8011"
+      - "8012:8012"
     restart: always
     environment:
       - JAVA_OPTS=
-        -DEUREKA_SERVER=http://eureka-server:8001/eureka
+        -DEUREKA_SERVER=http://online-library-eurika-server:8001/eureka
     depends_on:
       - online-library-eurika-server
       - postgres
+    networks:
+      - nw
+
+  online-library-hystrix-dashboard:
+    build:
+      context: online-library-hystrix-dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    restart: always
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://online-library-eurika-server:8001/eureka
+    depends_on:
+      - online-library-eurika-server
+      - online-library-author-service
+      - online-library-genre-service
+      - online-library-book-service
     networks:
       - nw
 
